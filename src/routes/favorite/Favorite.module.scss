@@ -1,0 +1,16 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/responsive';
+
+.favoritesPage {
+    height: 100vh;
+    width: 100%;
+    max-height: responsive.getMaxBreakpoint(SD);
+    max-width: responsive.getMaxBreakpoint(ML);
+    background-color: colors.$BLACK;
+    display: flex;
+    flex-direction: column;
+    
+    // @media screen and (max-width: responsive.getMaxBreakpoint(M)) {
+    //     background-color: colors.$BLACK;
+    // }
+}
