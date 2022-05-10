@@ -9,7 +9,17 @@
     background-color: colors.$BLACK;
     display: flex;
     flex-direction: column;
-    
+    .header {
+        flex: 1 1 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .title {
+            font-size: 18px;
+            font-weight: 700;
+            color: colors.$WHITE;
+        }
+    }
     // @media screen and (max-width: responsive.getMaxBreakpoint(M)) {
     //     background-color: colors.$BLACK;
     // }

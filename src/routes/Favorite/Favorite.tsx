@@ -1,4 +1,3 @@
-import Header from 'components/Header/Header'
 import MovieList from 'components/MovieList/MovieList'
 import NavBar from 'components/NavBar/NavBar'
 import styles from './Favorite.module.scss'
@@ -6,7 +5,9 @@ import styles from './Favorite.module.scss'
 const Favorite = () => {
   return (
     <div className={styles.favoritesPage}>
-      <Header />
+      <header className={styles.header}>
+        <h1 className={styles.title}>내 즐겨찾기</h1>
+      </header>
       <MovieList />
       <NavBar />
     </div>

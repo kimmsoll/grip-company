@@ -1,0 +1,20 @@
+@use '../../styles/constants/colors';
+
+.form {
+    display: flex;
+    width: 80%;
+    .input {
+        padding: 10px 0 10px 20px;
+        flex: 9 1 0;
+        background-color: colors.$GRAY3;
+        color: colors.$WHITE;
+        border-radius: 10px;
+    }
+    .button {
+        padding: 10px 0;
+        flex: 1 1 0;
+        svg {
+            fill : colors.$BLUE2;
+        }
+    }
+}
