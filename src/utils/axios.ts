@@ -1,9 +1,4 @@
-// https://github.com/axios/axios
-
 import axios, { AxiosError, AxiosResponse } from 'axios'
-
-const { CancelToken } = axios
-const { isCancel } = axios
 
 const baseSettings = {
   timeout: 10 * 1000,
@@ -35,4 +30,4 @@ const isAxiosError = <E>(err: unknown | AxiosError<E>): err is AxiosError => {
   return axios.isAxiosError(err)
 }
 
-export { axios, instance, plainInstance, CancelToken, isCancel, isAxiosError }
+export { axios, instance, plainInstance, isAxiosError }
