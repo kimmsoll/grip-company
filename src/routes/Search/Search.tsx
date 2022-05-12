@@ -34,8 +34,12 @@ const Search = () => {
       <header className={styles.header}>
         <SearchForm getSearched={getSearchedMovies}/>
       </header>
-      <MovieList />
-      <NavBar />
+      <main className={styles.main}>
+        <MovieList />
+      </main>
+      <footer className={styles.footer}>
+        <NavBar />
+      </footer>
     </div>
   )
 }

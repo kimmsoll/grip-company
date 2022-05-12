@@ -1,37 +1,51 @@
 @use '../../styles/constants/colors';
+@use '/src/styles/mixins/responsive';
 
 .movie {
+    flex: 1 0 150px;
     width: 90%;
-    height: 200px;
+    max-height: 150px;
     padding: 10px 20px;
+    margin-top: 10px;
     border-radius: 25px;
     display: flex;
     background: linear-gradient(to right, colors.$GRAY4, colors.$GRAY3);
     cursor: pointer;
-    + .movie {
-        margin-top: 10px;
-    }
     .imgContainer {
         flex: 1 1 0;
         display: flex;
         justify-content: center;
+        align-items: center;
         img {
+            width: 100%;
+            max-width: 100px;
             height: 100%;
+        }
+        .noPoster {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            > p {
+                padding-top: 10px;
+                color: colors.$GRAY1;
+            }
         }
     }
     .detailsContainer {
-        flex: 1.5 1 0;
+        flex: 2 1 0;
+        padding: 0 10px;
         .title {
-            font-size: 20px;
-            color: colors.$WHITE;
-            line-height: 24px;
-            height: 50%;
+            font-size: 18px;
+            line-height: 20px;
+            height: 70%;
             display: flex;
             align-items: center;
+            color: colors.$WHITE;
         }
         .year {
+            padding-bottom: 5px;
             color: colors.$GRAY1;
-            padding-bottom: 10px;
         }
         .type {
             color: colors.$GRAY2;
@@ -39,5 +53,29 @@
     }
     .star {
         margin-top: 10px;
+    }
+}
+
+.buttons {
+    flex: 1 0 150px;
+    width: 90%;
+    max-height: 150px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: colors.$GRAY5;
+    .button {
+        font-size: 14px;
+        width: 130px;
+        padding: 10px 20px;
+        border-radius: 10px;
+        color: colors.$WHITE;
+        background: colors.$GRADIENT;
+        + .button {
+            margin-left: 20px;
+        }
     }
 }

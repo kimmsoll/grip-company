@@ -1,18 +1,19 @@
 @use '../../styles/constants/colors';
 
 .form {
+    width: 90%;
+    margin-left: 20px;
     display: flex;
-    width: 80%;
     .input {
         padding: 10px 0 10px 20px;
-        flex: 9 1 0;
-        background-color: colors.$GRAY3;
-        color: colors.$WHITE;
         border-radius: 10px;
+        flex: 9 1 0;
+        color: colors.$WHITE;
+        background-color: colors.$GRAY3;
     }
     .button {
-        padding: 10px 0;
         flex: 1 1 0;
+        padding: 10px 0;
         svg {
             fill : colors.$BLUE2;
         }

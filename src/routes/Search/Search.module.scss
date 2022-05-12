@@ -2,21 +2,33 @@
 @use '/src/styles/mixins/responsive';
 
 .searchPage {
-    height: 100vh;
+    position: relative;
     width: 100%;
-    max-height: responsive.getMaxBreakpoint(SD);
+    height: 100%;
     max-width: responsive.getMaxBreakpoint(ML);
-    background-color: colors.$BLACK;
+    max-height: responsive.getMaxBreakpoint(SD);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+    background-color: colors.$BLACK;
     .header {
-        flex: 1 1 0;
+        position: absolute;
+        width: 100%;
+        height: 50px;
+        padding: 50px 0;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
     }
-    // @media screen and (max-width: responsive.getMaxBreakpoint(M)) {
-    //     background-color: colors.$BLACK;
-    // }
+    .main {
+        margin-top: 100px;
+        overflow-y: scroll;
+    }
+    .footer {
+        position: absolute;
+        width: 100%;
+        height: 70px;
+        bottom: 0;
+    }
 }
