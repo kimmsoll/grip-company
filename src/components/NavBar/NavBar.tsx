@@ -1,5 +1,5 @@
 import cx from 'classnames'
-import { NavLink } from "react-router-dom"
+import { NavLink } from 'react-router-dom'
 import styles from './NavBar.module.scss'
 import { SearchIcon, StarIcon } from 'assets/svgs'
 

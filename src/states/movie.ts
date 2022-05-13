@@ -3,7 +3,7 @@ import { atom } from 'hooks/state'
 import store from 'store'
 
 const favStatus = Boolean(store.get('favorites')?.length)
-const favorites : ISearchItem[] = favStatus ? store.get('favorites') : []
+const favorites: ISearchItem[] = favStatus ? store.get('favorites') : []
 
 export const movieListState = atom<ISearchItem[] | undefined>({
   key: '#movieListState',

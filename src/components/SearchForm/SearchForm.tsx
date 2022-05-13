@@ -4,15 +4,15 @@ import { SearchIcon } from 'assets/svgs'
 import styles from './SearchForm.module.scss'
 
 interface Params {
-  query : string
-  page : number
+  query: string
+  page: number
 }
 
 interface Props {
   getSearched(params?: Params): void
 }
 
-const SearchForm = ({ getSearched }: Props ) => {
+const SearchForm = ({ getSearched }: Props) => {
   const [inputValue, setInputValue] = useState('')
 
   const handleInputValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,14 +27,8 @@ const SearchForm = ({ getSearched }: Props ) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <input
-        name='input'
-        className={styles.input}
-        value={inputValue}
-        onChange={handleInputValue}
-        type='text'
-      />
-      <button className={styles.button} type="submit">
+      <input name='input' className={styles.input} value={inputValue} onChange={handleInputValue} type='text' />
+      <button className={styles.button} type='submit'>
         <SearchIcon />
       </button>
     </form>

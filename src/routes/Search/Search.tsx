@@ -7,8 +7,8 @@ import { movieListState } from 'states/movie'
 import styles from './Search.module.scss'
 
 interface Params {
-  query : string
-  page : number
+  query: string
+  page: number
 }
 
 const Search = () => {
@@ -32,7 +32,7 @@ const Search = () => {
   return (
     <div className={styles.searchPage}>
       <header className={styles.header}>
-        <SearchForm getSearched={getSearchedMovies}/>
+        <SearchForm getSearched={getSearchedMovies} />
       </header>
       <main className={styles.main}>
         <MovieList />
