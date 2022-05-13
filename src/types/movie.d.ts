@@ -13,3 +13,8 @@ export interface IMovieAPIRes {
   Response?: 'True' | 'False'
   Error?: string
 }
+
+export interface ITotalResults {
+  start: number
+  end?: number
+}

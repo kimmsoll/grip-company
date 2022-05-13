@@ -3,8 +3,9 @@ import NavBar from 'components/NavBar/NavBar'
 import SearchForm from 'components/SearchForm/SearchForm'
 import { useRecoil } from 'hooks/state'
 import { getMovies } from 'services/movie'
-import { movieListState } from 'states/movie'
+import { movieListState, totalResultsState } from 'states/movie'
 import styles from './Search.module.scss'
+import { ISearchItem } from 'types/movie'
 
 interface Params {
   query: string
@@ -12,7 +13,8 @@ interface Params {
 }
 
 const Search = () => {
-  const [, setMovies] = useRecoil(movieListState)
+  const [movies, setMovies] = useRecoil(movieListState)
+  const [totalResults, setTotalResults] = useRecoil(totalResultsState)
 
   const getSearchedMovies = (params?: Params) => {
     if (params) {
@@ -23,8 +25,12 @@ const Search = () => {
           return
         }
         if (data.Response === 'True') {
-          setMovies(data.Search)
+          movies?.length
+            ? setMovies(Array.from(new Set(movies.concat(data.Search as ISearchItem[]))))
+            : setMovies(data.Search)
+          setTotalResults({ start: totalResults.start + 1, end: Number(data.totalResults) })
         }
+        console.log(movies)
       })
     }
   }
@@ -35,7 +41,7 @@ const Search = () => {
         <SearchForm getSearched={getSearchedMovies} />
       </header>
       <main className={styles.main}>
-        <MovieList />
+        <MovieList getSearched={getSearchedMovies} />
       </main>
       <footer className={styles.footer}>
         <NavBar />
