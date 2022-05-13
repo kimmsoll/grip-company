@@ -1,0 +1,9 @@
+@use '../../styles/constants/colors';
+
+.loadingContainer {
+    width: 100%;
+    height: 100%;
+    > p {
+        color: colors.$WHITE;
+    }
+}
