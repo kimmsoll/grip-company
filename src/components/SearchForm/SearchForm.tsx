@@ -1,9 +1,10 @@
-import { useState, ChangeEvent, FormEvent } from 'react'
-
 import { SearchIcon } from 'assets/svgs'
-import styles from './SearchForm.module.scss'
+
+import { useState, ChangeEvent, FormEvent } from 'react'
 import { useRecoil } from 'hooks/state'
+
 import { currentInputState, movieListState } from 'states/movie'
+import styles from './SearchForm.module.scss'
 
 interface Params {
   query: string
@@ -17,7 +18,7 @@ interface Props {
 const SearchForm = ({ getSearched }: Props) => {
   const [inputValue, setInputValue] = useState('')
   const [, , moviesResetter] = useRecoil(movieListState)
-  const [, setCurrentInput, currentInputResetter] = useRecoil(currentInputState)
+  const [currentInput, setCurrentInput] = useRecoil(currentInputState)
 
   const handleInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.currentTarget.value)
@@ -25,10 +26,12 @@ const SearchForm = ({ getSearched }: Props) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e && e.preventDefault()
-    moviesResetter()
-    currentInputResetter()
-    setCurrentInput(inputValue.trim())
-    inputValue.trim() && getSearched({ query: inputValue.trim(), page: 1 })
+    if (inputValue.trim() !== currentInput) {
+      moviesResetter()
+      setCurrentInput(inputValue.trim())
+      getSearched({ query: inputValue.trim(), page: 1 })
+    }
+    e.currentTarget.focus()
   }
 
   return (

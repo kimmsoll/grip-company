@@ -1,5 +1,9 @@
+@use './styles/mixins/responsive';
+
 .app {
   height: 100vh;
+  min-height: responsive.getMinBreakpoint(M);
+  min-width: responsive.getMinBreakpoint(M);
   display: flex;
   align-items: center;
   justify-content: center;

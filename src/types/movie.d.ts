@@ -16,5 +16,5 @@ export interface IMovieAPIRes {
 
 export interface ITotalResults {
   start: number
-  end?: number
+  end: number
 }

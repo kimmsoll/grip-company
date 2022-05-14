@@ -22,7 +22,7 @@ export const favoriteState = atom({
 
 export const totalResultsState = atom<ITotalResults>({
   key: '#totalResultsState',
-  default: { start: 1 },
+  default: { start: 1, end: 1 },
 })
 
 export const currentInputState = atom<string>({

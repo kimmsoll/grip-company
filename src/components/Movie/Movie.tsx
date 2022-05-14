@@ -1,10 +1,12 @@
 import { FilledStarIcon, PopcornIcon } from 'assets/svgs'
+
+import { useEffect, useState, SyntheticEvent } from 'react'
 import { useRecoil } from 'hooks/state'
-import { useEffect, useState } from 'react'
 import { favoriteListState, favoriteState } from 'states/movie'
 import { ISearchItem } from 'types/movie'
-import styles from './Movie.module.scss'
+
 import store from 'store'
+import styles from './Movie.module.scss'
 
 const Movie = (props: ISearchItem) => {
   const { id, Poster, Title, Year, Type } = props
@@ -28,6 +30,14 @@ const Movie = (props: ISearchItem) => {
     handleClick()
   }
 
+  const handleImgLoad = (e: SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = Poster
+  }
+
+  const handleImgError = (e: SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = '../../assets/svgs/error.svg'
+  }
+
   useEffect(() => {
     store.set('favorites', favorites)
   }, [favorites])
@@ -44,8 +54,8 @@ const Movie = (props: ISearchItem) => {
   ) : (
     <li className={styles.movie} onClick={handleClick} role='presentation'>
       <div className={styles.imgContainer}>
-        {Poster !== 'N/A' ? (
-          <img src={Poster} alt='poster' />
+        {Poster !== 'N/A' || '' ? (
+          <img src={Poster} onLoad={handleImgLoad} onError={handleImgError} alt='poster' />
         ) : (
           <div className={styles.noPoster}>
             <PopcornIcon />

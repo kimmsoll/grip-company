@@ -1,8 +1,10 @@
 import Movie from 'components/Movie/Movie'
-import { useRecoil } from 'hooks/state'
-import { useCallback, useEffect, useState } from 'react'
+
+import { useCallback, useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useRecoil } from 'hooks/state'
 import { favoriteListState, movieListState, totalResultsState, currentInputState } from 'states/movie'
+
 import styles from './MovieList.module.scss'
 
 interface Params {
@@ -21,15 +23,16 @@ const MovieList = ({ getSearched }: Props) => {
   const [totalResults] = useRecoil(totalResultsState)
   const [currentInput] = useRecoil(currentInputState)
   const [target, setTarget] = useState<HTMLDivElement | null>(null)
+  const scrollRef = useRef<HTMLUListElement>(null)
 
   const inSearchPage = location.pathname === '/'
   const inFavoritesPage = location.pathname === '/favorite'
 
   const onIntersection: IntersectionObserverCallback = useCallback(
     ([entry], observer) => {
-      if (entry.isIntersecting && totalResults.end && totalResults.start < totalResults.end) {
+      if (entry.isIntersecting && totalResults.start <= totalResults.end && currentInput) {
         observer.unobserve(entry.target)
-        getSearched!({ query: currentInput, page: totalResults.start + 1 })
+        getSearched && getSearched({ query: currentInput, page: totalResults.start })
         observer.observe(entry.target)
       }
     },
@@ -46,21 +49,25 @@ const MovieList = ({ getSearched }: Props) => {
       observer.observe(target)
     }
     return () => observer && observer.disconnect()
-  }, [onIntersection, target])
+  }, [onIntersection, target, movies, totalResults])
+
+  useEffect(() => {
+    inSearchPage && scrollRef.current!.scrollTo(0, 0)
+  }, [inSearchPage, currentInput])
 
   return (
     <>
       {inSearchPage && (
         <div className={styles.movieListWrapper}>
-          <ul className={styles.movieList}>
+          <ul ref={scrollRef} className={styles.movieList}>
             {!movies?.length && <li className={styles.noSearchResult}>검색 결과가 없습니다</li>}
             {movies?.length &&
-              movies.map((movie) => {
+              movies?.map((movie) => {
                 const { imdbID, Poster, Title, Year, Type } = movie
                 return <Movie key={imdbID} id={imdbID} Poster={Poster} Title={Title} Year={Year} Type={Type} />
               })}
           </ul>
-          <div ref={setTarget}>Loading</div>
+          <div ref={setTarget} />
         </div>
       )}
       {inFavoritesPage && (
