@@ -26,3 +26,12 @@
 
 </br>
 
+### 4. 배포(Preview)
+
+https://grip-movie-app.netlify.app
+
+</br>
+
+| 검색 페이지 | 즐겨찾기 페이지 |
+|:---:|:---:|
+| ![search](https://user-images.githubusercontent.com/62868465/168456931-f7a5850e-3d5d-493d-8b04-f7306be2f5c5.gif) | ![favorites](https://user-images.githubusercontent.com/62868465/168457046-6683fffd-f5f1-457f-8810-4004a73de79f.gif) |
