@@ -44,10 +44,10 @@ const Movie = (props: ISearchItem) => {
 
   return toggleClick ? (
     <div className={styles.buttons}>
-      <button className={styles.button} type='button' onClick={handleFavorites}>
+      <button className={styles.mainButton} type='button' onClick={handleFavorites}>
         {favorState ? '즐겨찾기 제거' : '즐겨찾기'}
       </button>
-      <button className={styles.button} type='button' onClick={handleClick}>
+      <button className={styles.cancelButton} type='button' onClick={handleClick}>
         취소
       </button>
     </div>
@@ -65,10 +65,10 @@ const Movie = (props: ISearchItem) => {
       </div>
       <div className={styles.detailsContainer}>
         <p className={styles.title}>{Title}</p>
-        <p className={styles.year}>{Year}</p>
-        <p className={styles.type}>{Type}</p>
+        <span className={styles.type}>{Type}</span>
+        <span className={styles.year}>({Year})</span>
       </div>
-      <FilledStarIcon className={styles.star} style={{ fill: favorState ? '#0EDAD6' : '#060817' }} />
+      <FilledStarIcon className={styles.star} style={{ fill: favorState ? "url('#gradient')" : '#060817' }} />
     </li>
   )
 }

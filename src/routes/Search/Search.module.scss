@@ -10,9 +10,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow-y: scroll;
     background-color: colors.$BLACK;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        display: none;
+    }
     .header {
+        z-index: 99;
         position: absolute;
         width: 100%;
         height: 50px;
@@ -24,8 +28,12 @@
     .main {
         margin-top: 100px;
         overflow-y: scroll;
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
     .footer {
+        z-index: 99;
         position: absolute;
         width: 100%;
         height: 70px;
