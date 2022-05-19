@@ -4,7 +4,7 @@ import { useState, ChangeEvent, FormEvent } from 'react'
 import { useRecoil } from 'hooks/state'
 
 import { currentInputState, movieListState } from 'states/movie'
-import styles from './searchForm2.module.scss'
+import styles from './searchForm.module.scss'
 
 interface Params {
   query: string

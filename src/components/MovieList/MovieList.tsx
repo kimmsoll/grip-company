@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { useRecoil } from 'hooks/state'
 import { favoriteListState, movieListState, totalResultsState, currentInputState } from 'states/movie'
 
-import styles from './movieList2.module.scss'
+import styles from './movieList.module.scss'
 
 interface Params {
   query: string
