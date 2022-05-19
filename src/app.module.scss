@@ -1,0 +1,11 @@
+@use './styles/mixins/responsive';
+
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: responsive.getMinBreakpoint(M);
+  height: 100vh;
+  min-height: responsive.getMinBreakpoint(M);
+  background-color: #9ca3af;
+}

@@ -6,7 +6,7 @@ import { favoriteListState, favoriteState } from 'states/movie'
 import { ISearchItem } from 'types/movie'
 
 import store from 'store'
-import styles from './Movie.module.scss'
+import styles from './movie2.module.scss'
 
 const Movie = (props: ISearchItem) => {
   const { id, Poster, Title, Year, Type } = props

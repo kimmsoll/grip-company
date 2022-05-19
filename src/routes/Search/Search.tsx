@@ -8,7 +8,7 @@ import { currentInputState, movieListState, totalResultsState } from 'states/mov
 import { ISearchItem } from 'types/movie'
 
 import * as _ from 'lodash'
-import styles from './Search.module.scss'
+import styles from './search.module.scss'
 
 interface Params {
   query: string

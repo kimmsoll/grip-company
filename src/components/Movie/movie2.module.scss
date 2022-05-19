@@ -1,0 +1,137 @@
+@use '../../styles/constants/colors';
+@use '/src/styles/mixins/responsive';
+
+.movie {
+  display: flex;
+  flex: 1 0 150px;
+  width: 80%;
+  max-height: 150px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  background: colors.$GRADIENT1;
+  border-radius: 25px;
+  transition: all 200ms ease-in;
+  transition: all 200ms ease-in;
+  transition: all 200ms ease-in;
+  transition: all 200ms ease-in;
+  transform: scale(1);
+  transform: scale(1);
+  transform: scale(1);
+  transform: scale(1);
+
+  .imgContainer {
+    display: flex;
+    flex: 1 1 0;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      max-width: 100px;
+      height: 100%;
+    }
+
+    .noPoster {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      > p {
+        padding-top: 10px;
+        color: colors.$GRAY1;
+      }
+    }
+  }
+
+  .detailsContainer {
+    flex: 2 1 0;
+    padding: 0 10px;
+
+    .title {
+      display: flex;
+      align-items: center;
+      height: 70%;
+      font-size: 18px;
+      line-height: 20px;
+      color: colors.$WHITE;
+    }
+
+    .type,
+    .year {
+      color: colors.$GRAY1;
+    }
+
+    .type {
+      padding-right: 5px;
+    }
+  }
+
+  .star {
+    margin-top: 10px;
+  }
+
+  &:hover {
+    z-index: 2;
+    box-shadow: 0 0 150px #000000;
+    transition: all 200ms ease-in;
+    transition: all 200ms ease-in;
+    transition: all 200ms ease-in;
+    transition: all 200ms ease-in;
+    transform: scale(1.1);
+    transform: scale(1.1);
+    transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+
+.buttons {
+  display: flex;
+  flex: 1 0 150px;
+  align-items: center;
+  justify-content: center;
+  width: 88%;
+  max-height: 150px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: colors.$GRAY5;
+  border-radius: 25px;
+
+  .mainButton {
+    width: 130px;
+    padding: 15px 20px;
+    font-size: 14px;
+    color: colors.$WHITE;
+    border: 1.5px solid colors.$BLUE1;
+    border-radius: 15px;
+  }
+
+  .cancelButton {
+    width: 80px;
+    padding: 15px 20px;
+    margin-left: 20px;
+    font-size: 14px;
+    color: colors.$WHITE;
+    border: 1.5px solid colors.$BLUE1;
+    border-radius: 15px;
+  }
+
+  .mainButton,
+  .cancelButton {
+    &:hover,
+    &:focus {
+      background: colors.$GRADIENT2;
+      animation: 0.5s pulse forwards;
+    }
+  }
+}
+
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 0 0 colors.$BLUE2;
+  }
+  to {
+    box-shadow: 0 10px 15px -5px colors.$BLUE1;
+  }
+}

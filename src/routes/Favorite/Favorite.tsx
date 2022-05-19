@@ -1,6 +1,6 @@
 import MovieList from 'components/MovieList/MovieList'
 import NavBar from 'components/NavBar/NavBar'
-import styles from './Favorite.module.scss'
+import styles from './favorite.module.scss'
 
 const Favorite = () => {
   return (
