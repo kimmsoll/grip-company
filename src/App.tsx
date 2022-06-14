@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
+
 import Favorite from './routes/Favorite/Favorite'
 import Search from './routes/Search/Search'
 import NotFound from 'routes/NotFound/NotFound'
+
 import styles from './app.module.scss'
-import { RecoilRoot } from 'recoil'
 
 const App = () => {
   return (

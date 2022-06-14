@@ -1,37 +1,31 @@
+import { useState, ChangeEvent, FormEvent } from 'react'
+import { useSearchParams } from 'react-router-dom'
+
 import { SearchIcon } from 'assets/svgs'
 
-import { useState, ChangeEvent, FormEvent } from 'react'
-import { useRecoil } from 'hooks/state'
-
-import { currentInputState, movieListState } from 'states/movie'
 import styles from './searchForm.module.scss'
 
-interface Params {
-  query: string
-  page: number
-}
-
 interface Props {
-  getSearched(params?: Params): void
+  getMovies: (inputValue: string, page: number) => void
+  handleToTop: () => void
 }
 
-const SearchForm = ({ getSearched }: Props) => {
+const SearchForm = ({ getMovies, handleToTop }: Props) => {
   const [inputValue, setInputValue] = useState('')
-  const [, , moviesResetter] = useRecoil(movieListState)
-  const [currentInput, setCurrentInput] = useRecoil(currentInputState)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const currentSearch = searchParams.get('query')
 
   const handleInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.currentTarget.value)
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e && e.preventDefault()
-    if (inputValue.trim() !== currentInput) {
-      moviesResetter()
-      setCurrentInput(inputValue.trim())
-      getSearched({ query: inputValue.trim(), page: 1 })
-    }
+    e.preventDefault()
     e.currentTarget.focus()
+    if (!inputValue || currentSearch === inputValue.trim()) return
+    getMovies(inputValue.trim(), 1)
+    setSearchParams({ query: inputValue.trim(), page: '1' })
+    handleToTop()
   }
 
   return (

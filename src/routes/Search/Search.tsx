@@ -1,53 +1,86 @@
-import SearchForm from 'components/SearchForm/SearchForm'
-import MovieList from 'components/MovieList/MovieList'
-import NavBar from 'components/NavBar/NavBar'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { useInView } from 'react-intersection-observer'
+import * as _ from 'lodash'
 
 import { useRecoil } from 'hooks/state'
+import { movieListState } from 'states/movie'
 import { getMovies } from 'services/movie'
-import { currentInputState, movieListState, totalResultsState } from 'states/movie'
-import { ISearchItem } from 'types/movie'
 
-import * as _ from 'lodash'
+import SearchForm from 'routes/Search/SearchForm/SearchForm'
+import NavBar from 'components/NavBar/NavBar'
+import Movie from 'components/Movie/Movie'
+
 import styles from './search.module.scss'
-
-interface Params {
-  query: string
-  page: number
-}
 
 const Search = () => {
   const [movies, setMovies] = useRecoil(movieListState)
-  const [totalResults, setTotalResults] = useRecoil(totalResultsState)
-  const [, , currentInputResetter] = useRecoil(currentInputState)
+  const { ref, inView } = useInView({ threshold: 1 })
+  const scrollRef = useRef<HTMLUListElement>(null)
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const getSearchedMovies = (params?: Params) => {
-    if (params) {
-      getMovies(params).then((data) => {
+  const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1)
+  const [totalResults, setTotalResults] = useState(1)
+
+  const currentSearch = searchParams.get('query') || ''
+
+  const handleScrollToTop = () => {
+    scrollRef.current?.scrollIntoView()
+  }
+
+  const getSearchedMovies = useCallback(
+    (inputValue: string, page: number) => {
+      if (!inputValue) return
+      getMovies({ query: inputValue, page }).then((data) => {
         if (data.Error) {
-          currentInputResetter()
-          setTotalResults({ start: 1, end: 1 })
+          setTotalResults(0)
           return
         }
         if (data.Response === 'True') {
-          if (movies && movies.length && params.page !== 1) {
-            setMovies(_.uniqBy(movies.concat(data.Search as ISearchItem[]), (v) => v.imdbID))
-            setTotalResults({ start: totalResults.start + 1, end: Number(data.totalResults) })
+          if (movies.length && page !== 1) {
+            setMovies(_.uniqBy(movies.concat(data.Search as any), (v) => v.imdbID))
+            setSearchParams({ query: currentSearch, page: String(currentPage + 1) })
           } else {
-            setMovies(_.uniqBy(data.Search, (v) => v.imdbID))
-            setTotalResults({ start: 2, end: Number(data.totalResults) })
+            setMovies(() => _.uniqBy(data.Search, (v) => v.imdbID))
+            setTotalResults(Number(data.totalResults))
+            setCurrentPage(1)
           }
         }
       })
+    },
+    [movies, setMovies, setSearchParams, currentSearch, currentPage]
+  )
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout
+    if (currentSearch && inView && totalResults >= currentPage) {
+      timeout = setTimeout(() => {
+        setCurrentPage((prev) => prev + 1)
+        getSearchedMovies(currentSearch, currentPage + 1)
+      }, 1500)
     }
-  }
+    return () => clearTimeout(timeout)
+  }, [inView, getSearchedMovies, totalResults, currentPage, currentSearch, setSearchParams])
 
   return (
     <div className={styles.searchPage}>
       <header className={styles.header}>
-        <SearchForm getSearched={getSearchedMovies} />
+        <SearchForm getMovies={getSearchedMovies} handleToTop={handleScrollToTop} />
       </header>
       <main className={styles.main}>
-        <MovieList getSearched={getSearchedMovies} />
+        <ul className={styles.movieList} ref={scrollRef}>
+          {!movies.length && <li className={styles.noSearchResult}>검색 결과가 없습니다</li>}
+          {movies.length &&
+            movies.map((movie) => {
+              const { imdbID, Poster, Title, Year, Type } = movie
+              return <Movie key={imdbID} id={imdbID} Poster={Poster} Title={Title} Year={Year} Type={Type} />
+            })}
+          <li ref={ref}>
+            {movies.length && inView && currentPage <= totalResults && (
+              <span style={{ color: 'white' }}>Loading...</span>
+            )}
+          </li>
+        </ul>
       </main>
       <footer className={styles.footer}>
         <NavBar />

@@ -12,12 +12,6 @@
   background: colors.$GRADIENT1;
   border-radius: 25px;
   transition: all 200ms ease-in;
-  transition: all 200ms ease-in;
-  transition: all 200ms ease-in;
-  transition: all 200ms ease-in;
-  transform: scale(1);
-  transform: scale(1);
-  transform: scale(1);
   transform: scale(1);
 
   .imgContainer {
@@ -76,12 +70,6 @@
     z-index: 2;
     box-shadow: 0 0 150px #000000;
     transition: all 200ms ease-in;
-    transition: all 200ms ease-in;
-    transition: all 200ms ease-in;
-    transition: all 200ms ease-in;
-    transform: scale(1.1);
-    transform: scale(1.1);
-    transform: scale(1.1);
     transform: scale(1.1);
   }
 }
@@ -131,6 +119,7 @@
   from {
     box-shadow: 0 0 0 0 colors.$BLUE2;
   }
+
   to {
     box-shadow: 0 10px 15px -5px colors.$BLUE1;
   }

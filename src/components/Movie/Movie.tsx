@@ -1,18 +1,19 @@
-import { FilledStarIcon, PopcornIcon } from 'assets/svgs'
-
 import { useEffect, useState, SyntheticEvent } from 'react'
-import { useRecoil } from 'hooks/state'
+import store from 'store'
 import { favoriteListState, favoriteState } from 'states/movie'
+import { useRecoil } from 'hooks/state'
 import { ISearchItem } from 'types/movie'
 
-import store from 'store'
+import { FilledStarIcon, PopcornIcon } from 'assets/svgs'
+
 import styles from './movie.module.scss'
 
 const Movie = (props: ISearchItem) => {
-  const { id, Poster, Title, Year, Type } = props
-  const [toggleClick, setToggleClick] = useState(false)
   const [favorites, setFavorites] = useRecoil(favoriteListState)
   const [isFavorite, setIsFavorite] = useRecoil(favoriteState)
+  const [toggleClick, setToggleClick] = useState(false)
+
+  const { id, Poster, Title, Year, Type } = props
   const favorState = isFavorite.includes(id)
 
   const handleClick = () => {

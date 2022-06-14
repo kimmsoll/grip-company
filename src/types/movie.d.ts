@@ -8,13 +8,8 @@ export interface ISearchItem {
 }
 
 export interface IMovieAPIRes {
-  Search?: ISearchItem[]
+  Search?: ISearchItem[] | []
   totalResults?: string
   Response?: 'True' | 'False'
   Error?: string
-}
-
-export interface ITotalResults {
-  start: number
-  end: number
 }
