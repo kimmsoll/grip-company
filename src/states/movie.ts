@@ -17,5 +17,5 @@ export const favoriteListState = atom<ISearchItem[] | []>({
 
 export const favoriteState = atom({
   key: '#favoriteState',
-  default: favorites.map((v) => v.id) || [],
+  default: favorites.map((v) => v.imdbID) || [],
 })

@@ -30,7 +30,14 @@ const SearchForm = ({ getMovies, handleToTop }: Props) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <input name='input' className={styles.input} value={inputValue} onChange={handleInputValue} type='text' />
+      <input
+        name='input'
+        className={styles.input}
+        value={inputValue}
+        onChange={handleInputValue}
+        type='text'
+        maxLength={40}
+      />
       <button className={styles.button} type='submit'>
         <SearchIcon />
       </button>

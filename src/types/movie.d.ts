@@ -1,10 +1,9 @@
 export interface ISearchItem {
   Title: string
   Year: string
-  imdbID?: string
+  imdbID: string
   Type: string
   Poster: string
-  id?: string
 }
 
 export interface IMovieAPIRes {

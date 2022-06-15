@@ -1,4 +1,5 @@
-@use './styles/mixins/responsive';
+@use 'src/styles/constants/colors';
+@use 'src/styles/mixins/responsive';
 
 /* stylelint-disable */
 .app {
@@ -7,6 +8,5 @@
   justify-content: center;
   min-width: responsive.getMinBreakpoint(M);
   height: 100vh;
-  min-height: responsive.getMinBreakpoint(M);
-  background-color: #9ca3af;
+  background-color: colors.$BG_GRAY1;
 }

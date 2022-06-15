@@ -61,7 +61,7 @@ const Search = () => {
       }, 1500)
     }
     return () => clearTimeout(timeout)
-  }, [inView, getSearchedMovies, totalResults, currentPage, currentSearch, setSearchParams])
+  }, [inView, getSearchedMovies, totalResults, currentPage, currentSearch])
 
   return (
     <div className={styles.searchPage}>
@@ -74,14 +74,12 @@ const Search = () => {
           {movies.length &&
             movies.map((movie) => {
               const { imdbID, Poster, Title, Year, Type } = movie
-              return <Movie key={imdbID} id={imdbID} Poster={Poster} Title={Title} Year={Year} Type={Type} />
+              return <Movie key={imdbID} imdbID={imdbID} Poster={Poster} Title={Title} Year={Year} Type={Type} />
             })}
-          <li ref={ref}>{movies.length && inView && currentPage <= totalResults && <Loading />}</li>
+          <li ref={ref}>{movies.length && currentSearch && inView && currentPage <= totalResults && <Loading />}</li>
         </ul>
       </main>
-      <footer className={styles.footer}>
-        <NavBar />
-      </footer>
+      <NavBar />
     </div>
   )
 }
