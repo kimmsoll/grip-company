@@ -40,7 +40,7 @@ const Search = () => {
         if (data.Response === 'True') {
           if (movies.length && page !== 1) {
             setMovies(_.uniqBy(movies.concat(data.Search as any), (v) => v.imdbID))
-            setSearchParams({ query: currentSearch, page: String(currentPage + 1) })
+            setSearchParams({ query: currentSearch, page: String(currentPage) })
           } else {
             setMovies(() => _.uniqBy(data.Search, (v) => v.imdbID))
             setTotalResults(Number(data.totalResults))
@@ -58,7 +58,7 @@ const Search = () => {
       timeout = setTimeout(() => {
         setCurrentPage((prev) => prev + 1)
         getSearchedMovies(currentSearch, currentPage + 1)
-      }, 1500)
+      }, 2000)
     }
     return () => clearTimeout(timeout)
   }, [inView, getSearchedMovies, totalResults, currentPage, currentSearch])
