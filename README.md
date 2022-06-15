@@ -5,7 +5,7 @@
 원하는 영화를 검색하고, 나만의 즐겨찾기에 등록할 수 있는 앱입니다.
 
 ## 🚀 배포
-https://grip-movie-app.netlify.app
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8c963488-351b-41d4-9152-60535ac564b2/deploy-status)](https://favorite-movie-search.netlify.app/)
 
 ## 🔧 기술 스택
 
