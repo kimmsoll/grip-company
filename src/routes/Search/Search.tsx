@@ -8,6 +8,7 @@ import { movieListState } from 'states/movie'
 import { getMovies } from 'services/movie'
 
 import SearchForm from 'routes/Search/SearchForm/SearchForm'
+import Loading from 'components/Loading/Loading'
 import NavBar from 'components/NavBar/NavBar'
 import Movie from 'components/Movie/Movie'
 
@@ -75,11 +76,7 @@ const Search = () => {
               const { imdbID, Poster, Title, Year, Type } = movie
               return <Movie key={imdbID} id={imdbID} Poster={Poster} Title={Title} Year={Year} Type={Type} />
             })}
-          <li ref={ref}>
-            {movies.length && inView && currentPage <= totalResults && (
-              <span style={{ color: 'white' }}>Loading...</span>
-            )}
-          </li>
+          <li ref={ref}>{movies.length && inView && currentPage <= totalResults && <Loading />}</li>
         </ul>
       </main>
       <footer className={styles.footer}>
